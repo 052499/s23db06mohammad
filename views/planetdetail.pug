@@ -1,0 +1,29 @@
+extends layout
+ 
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to detail details
+  else
+    - let planetid = toShow._id
+    - let name = toShow.name
+    - let size = toShow.size
+    - let speed = toShow.speed
+ 
+    div
+      div.row
+        div(class='planetAttr mr-3') planet is:
+        div #{planetid}
+ 
+      div.row
+        div(class='planetAttr mr-3') name is:
+        div #{name}
+ 
+      div.row
+        div(class='planetAttr mr-3') size is:
+        div #{size}
+ 
+      div.row
+        div(class='planetAttr mr-3') speed is:
+        div #{speed}
+

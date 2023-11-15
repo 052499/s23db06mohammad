@@ -10,7 +10,20 @@ exports.planet_list = async function(req, res) {
         res.send(`{"error": ${err}}`);
         } 
 };
-// for a specific Costume.
+// Handle a show one view with id specified by query
+exports.planet_view_one_Page = async function (req, res) {
+    console.log("view for id " + req.query.id)
+    try {
+        result = await planet.findById(req.query.id)
+        res.render('planetdetail',
+            { title: 'Planet Detail', toShow: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
 // for a specific Costume.
 exports.planet_detail = async function(req, res) {
     console.log("detail" + req.params.id)
@@ -43,10 +56,19 @@ exports.planet_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     } ;
 };
-// Handle Costume delete form on DELETE.
-exports.planet_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: Costume delete DELETE ' + req.params.id);
+// Handle planet delete on DELETE.
+exports.planet_delete = async function(req, res) {
+console.log("delete " + req.params.id)
+try {
+result = await planet.findByIdAndDelete( req.params.id)
+console.log("Removed " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": Error deleting ${err}}`);
+}
 };
+
 // Handle Costume update form on PUT.
 //Handle Costume update form on PUT.
 exports.planet_update_put = async function(req, res) {
@@ -75,8 +97,8 @@ exports.planet_view_all_Page = async function(req, res) {
     try{
     console.log("IN")
     theplanets = await planet.find();
-    console.log(theplanets)
-    res.render('planets', { title: 'Search Results - planets', results: theplanets });
+    console.log(theplanet)
+    res.render('planet', { title: 'Search Results - planet', results: theplanets });
     }
     catch(err){
     //res.status(500);

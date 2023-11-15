@@ -1,9 +1,9 @@
 var express = require('express');
+const planet_controlers= require('../controllers/planet');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('planet', { title: 'Search Results planet' });
-});
+
+/* GET detail plants page */
+router.get('/detail', planet_controlers.planet_view_one_Page);
 
 module.exports = router;
