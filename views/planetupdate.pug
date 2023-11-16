@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  h1= title
+
+  if (toShow == null)
+    h2 No instance to update details
+  else
+    - let planetid = toShow._id
+    - let name = toShow.name
+    - let size = toShow.size
+    - let speed = toShow.speed
+
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{planetid}
+
+    - let actionid = "/resource/planet/" + planetid
+    form(id='planetForm', action=actionid, method="PUT")
+      div.form-group
+        label.planetAttr(for='name') Planet Name
+        input#name(type='text', name='name', value=name)
+      div.form-group
+        label.planetAttr(for='size') Planet Size
+        input#size(type='text', name='size', value=size)
+      div.form-group
+        label.planetAttr(for='speed') Planet Speed
+        input#speed(type='number', name='speed', value=speed)
+      input(type='submit')
+
+      script.
+        document.forms['planetForm'].addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          try {
+            // Show user that form is being submitted
+            alert("Saving...");
+
+            const formData = new FormData(event.target);
+            const response = await fetch(event.target.action, {
+              method: 'PUT',
+              body: new URLSearchParams(formData),
+            });
+
+            if (!response.ok) {
+              throw new Error(`Save failed with status: ${response.status}`);
+            }
+
+            const responseBody = await response.text();
+            // TODO: Handle the response body as needed
+            alert("Save succeeded");
+
+          } catch (error) {
+            // Handle error
+            console.error("Save failed", error);
+            alert("Save failed: " + error.message);
+          }
+        });
