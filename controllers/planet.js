@@ -136,13 +136,11 @@ failed`);
 // Handle a show all view
 exports.planet_view_all_Page = async function(req, res) {
     try{
-    console.log("IN")
-    theplanets = await planet.find();
-    console.log(theplanet)
-    res.render('planet', { title: 'Search Results - planet', results: theplanets });
-    }
-    catch(err){
-    //res.status(500);
-    res.send(`{"error": ${err}}`);
-    }
-}
+        theplanet = await planet.find();
+        res.render('planet', { title: 'planet Search Results', results: theplanet });
+        }
+        catch(err){
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+        }
+       };

@@ -2,6 +2,8 @@ var express = require('express');
 const planet_controlers= require('../controllers/planet');
 var router = express.Router();
 
+router.get('/', planet_controlers.planet_view_all_Page );
+
 
 /* GET detail planet page */
 router.get('/detail', planet_controlers.planet_view_one_Page);
