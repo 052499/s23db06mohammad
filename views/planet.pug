@@ -1,15 +1,22 @@
 extends layout
 
 block content
-  h1= title
-  - var results = [{name:"Earth", size:11234, speed:780000},{name:"Jupiter", size:49876, speed:890000},{name:"Saturn", size:56532, speed:685237}]
-  div(class="container-fluid")
-    div(class="row")
-      each v, index in results 
-        - let destination = `dispatch("/planet/update?id=${v._id}")`
-        div(class="col-sm-2", onclick=`buy(${index})`) #{v.name}, #{v.size}, #{v.speed}
-        button.btn(class="btn-primary ml-1", onclick=destination) Update
+  h1= title2
+  -let result = results;
+  - var planet = [{name:"Earth", size:11234, speed:780000},{name:"Jupiter", size:49876, speed:890000},{name:"Saturn", size:56532, speed:685237}]
+  div(class="container-fluid mt-3")
+    div(class="row m-1")
+      each result, index in results
+        - let destination = `dispatch("/planet/update?id=${result._id}")`
+        div(class="col-sm-2", onclick=`buy(${index})`)
+          | #{result.name}, #{result.size}, #{result.speed}
+          button.btn(class="btn-primary ml-1", onclick=destination) Update
       script.
+        function buy(a)
+        {
+            alert(`You purchased Item ${a+1}`)
+        }
         function dispatch(path){
           window.location.href = path;
         }
+ 
