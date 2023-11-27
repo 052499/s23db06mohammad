@@ -1,20 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to Webpage Collection
-  p Khalida Parveen 
-  button(type="button", class="btn btn-primary" onclick="goFaster()") Press Me
-  br
-  div#faster Increase the speed 
-  a(href="/planet") planet Search Results
-    script.
-      var mph = 20;
-      var change = 1;
-
-      function goFaster() {
-        mph += change;
-        change += 1;
-        var div = document.getElementById("faster");
-        div.textContent = "MPH " + mph + " with change " +change;
-      }
+  if (!user)
+    a(href="/login") Login
+    br
+    a(href="/register") Register
+  if (user)
+    p You are currently logged in as #{user.username}
+    a(href="/planet") Take me to planet
+    br
+    a(href="/logout") Logout
