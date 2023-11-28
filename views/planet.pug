@@ -2,6 +2,7 @@ extends layout
 
 block content
   h1= title2
+  a(class="btn btn-success" href="/planet/create") Create
   -let result = results;
   - var planet = [{name:"Earth", size:11234, speed:780000},{name:"Jupiter", size:49876, speed:890000},{name:"Saturn", size:56532, speed:685237}]
   div(class="container-fluid mt-3")
@@ -11,6 +12,7 @@ block content
         div(class="col-sm-2", onclick=`buy(${index})`)
           | #{result.name}, #{result.size}, #{result.speed}
           button.btn(class="btn-primary ml-1", onclick=destination) Update
+          a(class="btn btn-danger" href=`/planet/delete?id=${result._id}`) Delete
       script.
         function buy(a)
         {
