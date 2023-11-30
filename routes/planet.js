@@ -17,7 +17,7 @@ router.get('/', planet_controlers.planet_view_all_Page );
 router.get('/detail', secured, planet_controlers.planet_view_one_Page);
 
 /* GET create planet page */
-router.get('/create', planet_controlers.planet_create_Page);
+router.get('/create', secured, planet_controlers.planet_create_Page);
 
 /* GET create update page */
 /* GET update planet page */
